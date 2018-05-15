@@ -100,7 +100,7 @@ GLuint LoadShaders(const char * vertex_file_path, const char * fragment_file_pat
 		LogError("Impossible to open vertexshader.");
 		return 0;
 	}
-
+	//Mic Check
 	std::string FragmentShaderCode;
 
 	std::ifstream FragmentShaderStream(fragment_file_path, std::ios::in);
