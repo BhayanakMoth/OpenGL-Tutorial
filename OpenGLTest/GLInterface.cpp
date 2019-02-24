@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GLIntferace.h"
+using namespace GLI;
 GLSetup::GLSetup(int * err)
 {
 	if (!glfwInit())
@@ -23,9 +24,21 @@ void GLSetup::SetGLFWWindow(short samples, short major, short minor, int profile
 	glfwWindowHint(GLFW_OPENGL_PROFILE, profile);
 
 }
-GLFWwindow * GLSetup::CreateWindow(int width, int height, std::string title) const
+GLFWwindow * GLSetup::CreateWindow(int _width, int _height, std::string title) 
 {
-	GLFWwindow * window;
-	window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
+	GLFWmonitor* primary = glfwGetPrimaryMonitor();
+	const GLFWvidmode* mode = glfwGetVideoMode(primary);
+	glfwWindowHint(GLFW_RED_BITS, mode->redBits);
+	glfwWindowHint(GLFW_GREEN_BITS, mode->greenBits);
+	glfwWindowHint(GLFW_BLUE_BITS, mode->blueBits);
+	glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
+	if(_width == 0)
+		_width = mode->width;
+	if (_height == 0)
+		_height = mode->height;
+	
+    height = _height;
+	width = _width;
+	GLFWwindow* window = glfwCreateWindow(_width, _height, title.c_str(), NULL, NULL);
 	return window;
 }
