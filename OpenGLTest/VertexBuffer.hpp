@@ -7,6 +7,7 @@ class VertexBuffer
 private:
 	unsigned int m_ID;
 	bool set;
+	unsigned int size = 0;
 public:
 	VertexBuffer()
 	{
@@ -14,7 +15,7 @@ public:
 	}
 	VertexBuffer(const void * p_Data, unsigned int p_Size, unsigned int p_Draw = GL_DYNAMIC_DRAW)
 	{
-		
+		size = p_Size;
 		glGenBuffers(1, &m_ID);
 		glBindBuffer(GL_ARRAY_BUFFER, m_ID);
 		glBufferData(GL_ARRAY_BUFFER, p_Size, p_Data, p_Draw);
